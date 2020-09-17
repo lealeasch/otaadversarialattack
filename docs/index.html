@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Over-the-Air Adversarial Examples</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/fontawesome-all.min.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/mdb.min.css" rel="stylesheet" media="screen">
+  <link href="css/style.min.css" rel="stylesheet" media="screen">
+  <link rel="apple-touch-icon" sizes="180x180" href="ico/apple-touch-icon.png?v=vMdg08k5Pk">
+  <link rel="manifest" href="ico/site.webmanifest?v=vMdg08k5Pk">
+  <link rel="mask-icon" href="ico/safari-pinned-tab.svg?v=vMdg08k5Pk" color="#5bbad5">
+  <link rel="shortcut icon" href="ico/favicon.ico?v=vMdg08k5Pk">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-config" content="ico/browserconfig.xml?v=vMdg08k5Pk">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+
+
+
+    <br>
+
+
+    <div class="container" id="intro">
+      <h1 class="display-4">Over-the-Air Adversarial Examples</h1>
+
+    
+    <br>
+
+      <hr>
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-8">
+
+            <!-- Player -->
+            <div class="card" id="player">
+                <div class="card-body">
+                    <div class="col-12" style="min-height: 60px;">
+                      <h4 class="card-title"><span id="typed" class="m-0" style="font-variant:small-caps;"></span></h4>
+                    </div>
+                    <hr>
+
+                    <div id="waveform"></div>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="row justify-content-between;" style="align-items: center">
+                        <div style="margin-right:auto; padding-left:15px;">
+                            <button type="button" id="playBtn" class="btn btn-md rgba-blue-strong" disabled onclick="playFile();"><i class="fa fa-play"></i> Play</button>
+                        </div>
+                        <div style="margin-left:auto; padding-right:15px;">
+                            <button type="button" id="stopBtn" class="btn btn-md rgba-red-strong" disabled onclick="stopFile();"><i class="fa fa-stop"></i> Stop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Player End -->
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <br>
+
+
+      <div class="container" id="attack">
+              <div class="row">
+            <div class="col-sm-12">
+
+                 <!-- Player -->
+                <div class="card" id="player2">
+                    <div class="card-body">
+                        <div class="col-12" style="min-height: 60px;">
+                            <h4 class="card-title"><span id="typed2" class="m-0" style="font-variant:small-caps;"></span></h4>
+                        </div>
+                        <hr>
+
+                        <div id="waveform2"></div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="row justify-content-between;" style="align-items: center">
+                            <div style="margin-right:auto; padding-left:15px;">
+                                <button id="playBtn2" type="button" class="btn btn-md rgba-blue-strong" disabled onclick="playFile2();"><i class="fa fa-play"></i> Play</button>
+                            </div>
+                            <div style="margin-left:auto; padding-right:15px;">
+                                <button id="stopBtn2" type="button" class="btn btn-md rgba-red-strong" disabled onclick="stopFile2();"><i class="fa fa-stop"></i> Stop</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Player End -->   
+                
+                <div class="table-responsive text-nowrap" id="example">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">  <h2><b>Adapted</b></h2></th>
+                        <th scope="col" class="janheadline">Adversarial</th>
+                        <th scope="col" class="janheadline">Simulated</th>
+                        <th scope="col" class="janheadline">Real Over-the-Air</th>
+                        <th scope="col" class="janheadline">Original</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="janheadline">Example 1</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('5')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('6')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('7')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('4')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="janheadline">Example 2</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('9')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('10')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('11')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('8')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      <tr>
+                       <th scope="row" class="janheadline">With Hearing Thresholds</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('1')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('2')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('3')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                       <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('0')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+                <div class="table-responsive text-nowrap" id="example">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">  <h2><b>Generic</b></h2></th>
+                        <th scope="col" class="janheadline">Adversarial</th>
+                        <th scope="col" class="janheadline">Simulated</th>
+                        <th scope="col" class="janheadline">Real Over-the-Air</th>
+                        <th scope="col" class="janheadline">Original</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="janheadline">Birds</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('13')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('14')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('15')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('12')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="col"> </th>
+                        <th scope="col" class="janheadline">Adversarial</th>
+                        <th scope="col" class="janheadline">Simulated</th>
+                        <th scope="col" class="janheadline">Real Room 1</th>
+                        <th scope="col" class="janheadline">Real Room 2</th>
+                        <th scope="col" class="janheadline">Original</th>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="janheadline">Example 1</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('17')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('18')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('19')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('20')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('16')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      <tr>
+                      <tr>
+                        <th scope="row" class="janheadline">Example 2</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('22')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('23')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('24')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('25')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('21')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      <!-- <tr>
+                       <th scope="row" class="janheadline">With Hearing Thresholds</th>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('27')"><i class="fa fa-play"></i> Adversarial</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-grey-strong" onclick="loadAudio('28')"><i class="fa fa-play"></i> Simulated</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('29')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-md rgba-red-strong" onclick="loadAudio('30')"><i class="fa fa-play"></i> Real</button>
+                        </td>
+                       <td>
+                          <button type="button" class="btn btn-md rgba-green-strong" onclick="loadAudio('26')"><i class="fa fa-play"></i> Original</button>
+                        </td>
+                      </tr> -- >
+                    </tbody>
+                  </table>
+                </div>
+         
+            </div>
+
+
+
+    </div>
+          </div>
+               <br>
+
+
+
+              </div>
+            </div>
+
+<br>
+
+
+    <br>
+
+  
+
+
+<!-- Footer -->
+ <button id="myhiddenbutton" style="display: none;"></button>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/mdb.min.js"></script>
+  <script src="js/wavesurfer/wavesurfer.min.js"></script>
+  <script src="js/typed.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/audio.js"></script>
+  <script>
+    $('.navbar-collapse a').click(function () {
+      $(".navbar-collapse").collapse('hide');
+    });
+  </script>
+  <script>
+    $(".smooth-scroll").on('click', 'a', function (event) {
+      event.preventDefault();
+      var elAttr = $(this).attr('href');
+      var offset = ($(this).attr('data-offset') ? $(this).attr('data-offset') : 0);
+      var fixedTop = $('.navbar.fixed-top');
+      if (fixedTop && fixedTop.length) {
+        offset = fixedTop.outerHeight();
+      }
+      $('body,html').animate({
+        //scrollTop: $(elAttr).offset().top - offset
+        scrollTop: $(elAttr).offset().top - 56
+      }, 700);
+    });
+  </script>
+
+</body>
